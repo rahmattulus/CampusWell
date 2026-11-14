@@ -18,7 +18,9 @@ class AuthController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
             if ($user->isStudent()) {
-                return redirect()->route('student.home');
+                return $user->isVerified() 
+                    ? redirect()->route('student.home') 
+                    : redirect()->route('verification.notice');
             } elseif ($user->isDoctor()) {
                 return redirect()->route('doctor.dashboard');
             } elseif ($user->isAdmin()) {
@@ -27,6 +29,23 @@ class AuthController extends Controller
         }
 
         return view('auth.login');
+    }
+
+    /**
+     * Show staff login form (D-01).
+     */
+    public function showStaffLoginForm(): View|RedirectResponse
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->isDoctor()) {
+                return redirect()->route('doctor.dashboard');
+            } elseif ($user->isAdmin()) {
+                return redirect()->route('admin.dashboard');
+            }
+        }
+
+        return view('auth.login-staff');
     }
 
     /**
@@ -51,7 +70,9 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->isStudent()) {
-                return redirect()->intended(route('student.home'));
+                return $user->isVerified()
+                    ? redirect()->intended(route('student.home'))
+                    : redirect()->route('verification.notice');
             } elseif ($user->isDoctor()) {
                 return redirect()->intended(route('doctor.dashboard'));
             } elseif ($user->isAdmin()) {

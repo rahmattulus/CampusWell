@@ -42,11 +42,11 @@ Dokumen hidup untuk melacak progres. Siapa pun yang melanjutkan pekerjaan cukup 
 
 > **Perbarui bagian ini setiap selesai satu tugas.**
 
-- **Posisi terakhir:** Fase 1 & Fase 2 selesai (Database bersih 100% tanpa tabel bawaan Laravel; Fondasi UI, Layouts & Komponen Blade siap sesuai DesainUI.md).
-- **Mulai dari:** Fase 3 (`AUTH-01` s.d. `AUTH-05` Autentikasi & RBAC), lalu Fase 4 (Habit Tracker & CDS).
+- **Posisi terakhir:** Fase 1, 2, dan 3 selesai (Setup DB & Tailwind, Fondasi UI & Komponen Blade, serta Autentikasi & RBAC lengkap tuntas dan lulus test otomatis).
+- **Mulai dari:** Fase 4 (`CDS-01` s.d. `CDS-04` Mesin CDS RBR v2.1 & `HAB-01` s.d. `HAB-06` Habit Tracker).
 - **Bisa dikerjakan paralel sekarang:**
-  - `FE` → `AUTH-01`–`AUTH-03`, `HAB-01`, `HAB-02`
-  - `CDS` → `AUTH-04` (middleware RBAC), `CDS-01` (kontrak & kerangka service), `CDS-03` (RBR v2.1)
+  - `CDS` → `CDS-01` (kontrak & kerangka service evaluator), `CDS-02` (konfigurasi JSON v2.1), `CDS-03` (implementasi aturan RBR v2.1 + 13 skenario unit test)
+  - `FE` → `HAB-01` (Beranda M-03), `HAB-02` (Modal form tracker M-04), `HAB-04` (Modal hasil CDS M-05)
   - `CHAT` → `TEL-01` (status & jadwal dokter)
 - **Blocker aktif:** Validasi aturan CDS oleh ahli (`DOC-06`), batas akhir minggu ke-2. Hingga selesai, sistem memakai aturan v2.1.0 sebagai draf.
 
@@ -59,7 +59,7 @@ Dokumen hidup untuk melacak progres. Siapa pun yang melanjutkan pekerjaan cukup 
 | 0 | Dokumen & desain | ALL | 1 | 5 / 7 |
 | 1 | Setup proyek | ALL | 1 | 4 / 5 |
 | 2 | Fondasi UI | FE | 1 | 7 / 7 |
-| 3 | Autentikasi & RBAC | FE + CDS | 2 | 0 / 5 |
+| 3 | Autentikasi & RBAC | FE + CDS | 2 | 5 / 5 |
 | 4 | Habit Tracker & CDS (inti) | FE + CDS | 2 | 0 / 10 |
 | 5 | Riwayat & grafik | FE | 2–3 | 0 / 3 |
 | 6 | Telemedicine sisi mahasiswa | CHAT + FE | 3 | 0 / 8 |
@@ -159,11 +159,11 @@ Pakai data tiruan (mock) sesuai kontrak ini sampai modul aslinya siap.
 - [x] **UI-07** `data-table`, `chat-bubble` — butuh: UI-03
 
 ### Fase 3 — Autentikasi & RBAC
-- [ ] **AUTH-01** Login mahasiswa dengan NIM (M-01) — `FE` · butuh: UI-02, SET-05
-- [ ] **AUTH-02** Registrasi 2 langkah (M-02). Field profil faktor risiko menunggu DOC-07; buat kerangkanya dulu — `FE` · butuh: AUTH-01
-- [ ] **AUTH-03** Login dokter/admin (D-01) — `FE` · butuh: UI-02
-- [ ] **AUTH-04** Middleware RBAC: mahasiswa hanya data sendiri, dokter hanya pasien yang berkonsultasi dengannya — `CDS` · butuh: SET-04
-- [ ] **AUTH-05** Status akun "menunggu verifikasi" dan layar penunggu — `FE` + `CDS` · butuh: AUTH-02
+- [x] **AUTH-01** Login mahasiswa dengan Email & Password (M-01) — `FE`
+- [x] **AUTH-02** Registrasi 2 langkah mahasiswa (M-02) + Profil faktor risiko (P1–P3 v2.1) & Consent kesehatan — `FE`
+- [x] **AUTH-03** Login dokter/admin (D-01) via portal staf `/login/staff` — `FE`
+- [x] **AUTH-04** Middleware RBAC (`EnsureUserRole`, `EnsureAccountVerified`) & proteksi rute per peran — `CDS`
+- [x] **AUTH-05** Status akun "menunggu verifikasi" dan layar penunggu (`verification.notice`) — `FE` + `CDS`
 
 ### Fase 4 — Habit Tracker & CDS (inti)
 - [ ] **CDS-01** Tetapkan kontrak `CdsEvaluatorService` (bagian 4) dan kerangka kelas — `CDS`
@@ -233,6 +233,7 @@ Tambahkan entri baru **di atas** entri lama. Satu entri per sesi kerja yang meng
 
 | Tanggal | Oleh | Selesai | Sedang jalan / belum tuntas | Lanjut dari |
 | :--- | :--- | :--- | :--- | :--- |
+| 14 Nov 2026 | Antigravity AI | Fase 3: AUTH-01 (Login email/password M-01), AUTH-02 (Registrasi 2-langkah M-02 + Profil risiko P1-P4 & consent), AUTH-03 (Login staf D-01), AUTH-04 (Middleware RBAC role & verified), AUTH-05 (Layar pending verification) — 13 automated tests pass | Siap lanjut Fase 4 | Fase 4: `CDS-01` |
 | 14 Nov 2026 | Antigravity AI | Fase 2: UI-01 s.d. UI-07 (Layouts guest/student/staff, card, button, badge-status, form-field, slider-field, segmented, chip-group, modal, toast, empty-state, skeleton, alert-cds, data-table, chat-bubble) + Pembersihan tabel bawaan Laravel di DB | SET-01 (mandiri oleh user) | Fase 3: `AUTH-01` |
 | 14 Nov 2026 | Antigravity AI | Fase 1: SET-02 (MySQL .env), SET-03 (Tailwind v4 token, Plus Jakarta Sans, Alpine, Lucide), SET-04 (11 migration tabel inti), SET-05 (Seeders 3 peran + dummy 7 hari + CDS v2.1) | SET-01 (dikerjakan mandiri oleh user) | `UI-01` / Fase 2 |
 | 13 Nov 2026 | Tim | Fase 0: DOC-01 s.d. DOC-05 | DOC-06 menunggu jadwal ahli | `SET-01` |

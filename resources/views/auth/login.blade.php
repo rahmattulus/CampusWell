@@ -90,10 +90,17 @@
             </div>
         </div>
 
-        <!-- Registration Link -->
-        <div class="text-center pt-2 text-xs text-ink-mute">
-            <span>Belum memiliki akun?</span>
-            <a href="#" class="font-semibold text-ink hover:underline ml-1">Daftar sebagai Mahasiswa</a>
+        <!-- Registration & Staff Links -->
+        <div class="text-center pt-2 text-xs text-ink-mute space-y-2">
+            <div>
+                <span>Belum memiliki akun?</span>
+                <a href="{{ route('register') }}" class="font-semibold text-ink hover:underline ml-1">Daftar sebagai Mahasiswa</a>
+            </div>
+            <div>
+                <a href="{{ route('login.staff') }}" class="text-ink-mute hover:text-ink font-medium transition-colors">
+                    Masuk sebagai Dokter / Staf Klinik &rarr;
+                </a>
+            </div>
         </div>
     </div>
 </x-layouts.guest>

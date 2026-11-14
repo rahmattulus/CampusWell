@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect root to login
@@ -8,18 +9,28 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Authentication Routes (AUTH-01)
+// Authentication Routes (AUTH-01, AUTH-02, AUTH-03)
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/login/staff', [AuthController::class, 'showStaffLoginForm'])->name('login.staff');
+
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register']);
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Protected Routes (Placeholders for role redirection)
-Route::middleware('auth')->group(function () {
-    // Student Routes
-    Route::prefix('student')->name('student.')->group(function () {
+// Pending Verification Notice (AUTH-05)
+Route::get('/verification/notice', function () {
+    return view('auth.pending-verification');
+})->name('verification.notice')->middleware('auth');
+
+// Protected Routes with RBAC Middleware (AUTH-04)
+Route::middleware(['auth'])->group(function () {
+    // Student Routes (Protected by role:student and verified_student)
+    Route::prefix('student')->name('student.')->middleware(['role:student', 'verified_student'])->group(function () {
         Route::get('/home', function () {
             return view('student.home');
         })->name('home');
@@ -37,8 +48,8 @@ Route::middleware('auth')->group(function () {
         })->name('profile');
     });
 
-    // Doctor Routes
-    Route::prefix('doctor')->name('doctor.')->group(function () {
+    // Doctor Routes (Protected by role:doctor)
+    Route::prefix('doctor')->name('doctor.')->middleware(['role:doctor'])->group(function () {
         Route::get('/dashboard', function () {
             return view('doctor.dashboard');
         })->name('dashboard');
@@ -60,8 +71,8 @@ Route::middleware('auth')->group(function () {
         })->name('schedule');
     });
 
-    // Admin Routes
-    Route::prefix('admin')->name('admin.')->group(function () {
+    // Admin Routes (Protected by role:admin)
+    Route::prefix('admin')->name('admin.')->middleware(['role:admin'])->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
