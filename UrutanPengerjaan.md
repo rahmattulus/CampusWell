@@ -42,12 +42,12 @@ Dokumen hidup untuk melacak progres. Siapa pun yang melanjutkan pekerjaan cukup 
 
 > **Perbarui bagian ini setiap selesai satu tugas.**
 
-- **Posisi terakhir:** Fase 1 selesai (SET-02, SET-03, SET-04, SET-05 selesai; SET-01 dikerjakan mandiri oleh user).
-- **Mulai dari:** Fase 2 (`UI-01` – `UI-07` fondasi UI dan layout), lalu Fase 3 (`AUTH-01` s.d. `AUTH-05`).
+- **Posisi terakhir:** Fase 1 & Fase 2 selesai (Database bersih 100% tanpa tabel bawaan Laravel; Fondasi UI, Layouts & Komponen Blade siap sesuai DesainUI.md).
+- **Mulai dari:** Fase 3 (`AUTH-01` s.d. `AUTH-05` Autentikasi & RBAC), lalu Fase 4 (Habit Tracker & CDS).
 - **Bisa dikerjakan paralel sekarang:**
-  - `FE` → `UI-01`–`UI-07`, `AUTH-01`–`AUTH-03`
-  - `CDS` → `CDS-01` (kontrak & kerangka service), `CDS-02` (konfigurasi CDS v2.1), `CDS-03` (implementasi aturan RBR v2.1)
-  - `CHAT` → `TEL-01` (status & jadwal dokter), `TEL-05` (polling chat HTTP 3–5 detik)
+  - `FE` → `AUTH-01`–`AUTH-03`, `HAB-01`, `HAB-02`
+  - `CDS` → `AUTH-04` (middleware RBAC), `CDS-01` (kontrak & kerangka service), `CDS-03` (RBR v2.1)
+  - `CHAT` → `TEL-01` (status & jadwal dokter)
 - **Blocker aktif:** Validasi aturan CDS oleh ahli (`DOC-06`), batas akhir minggu ke-2. Hingga selesai, sistem memakai aturan v2.1.0 sebagai draf.
 
 ---
@@ -58,7 +58,7 @@ Dokumen hidup untuk melacak progres. Siapa pun yang melanjutkan pekerjaan cukup 
 | :--- | :--- | :--- | :--- | :--- |
 | 0 | Dokumen & desain | ALL | 1 | 5 / 7 |
 | 1 | Setup proyek | ALL | 1 | 4 / 5 |
-| 2 | Fondasi UI | FE | 1 | 0 / 7 |
+| 2 | Fondasi UI | FE | 1 | 7 / 7 |
 | 3 | Autentikasi & RBAC | FE + CDS | 2 | 0 / 5 |
 | 4 | Habit Tracker & CDS (inti) | FE + CDS | 2 | 0 / 10 |
 | 5 | Riwayat & grafik | FE | 2–3 | 0 / 3 |
@@ -141,7 +141,7 @@ Pakai data tiruan (mock) sesuai kontrak ini sampai modul aslinya siap.
 
 ## 6. Fase 1 — Setup Proyek
 
-- [ ] **SET-01** Repositori Git, branch `main`, aturan PR dan review — `ALL` (Dikerjakan mandiri oleh user)
+- [x] **SET-01** Repositori Git, branch `main`, aturan PR dan review — `ALL` (Dikerjakan mandiri oleh user)
 - [x] **SET-02** Instal Laravel, konfigurasi `.env`, koneksi database (MySQL `campuswell`) — `ALL`
 - [x] **SET-03** Pasang Tailwind v4, token warna/bayangan/radius, font Plus Jakarta Sans, Alpine.js, Lucide — `FE`
 - [x] **SET-04** Migrasi skema dasar: `users` (+peran, NIM, status verifikasi), `user_profiles`, `doctors`, `habit_logs`, `cds_evaluations`, `alert_dismissals`, `consult_tickets`, `chat_messages`, `medical_records`, `cds_cases`, `cds_config_versions`, `audit_logs` — `CDS` + `CHAT`
@@ -150,13 +150,13 @@ Pakai data tiruan (mock) sesuai kontrak ini sampai modul aslinya siap.
 ## 7. Fase 2–5 — Fondasi UI, Autentikasi, Habit Tracker & CDS
 
 ### Fase 2 — Fondasi UI (`FE`)
-- [ ] **UI-01** `tailwind.config.js` dengan token warna/radius/bayangan (`DesainUI` §3) — butuh: SET-03
-- [ ] **UI-02** Layout `guest`, `student` (bottom nav), `staff` (sidebar + topbar) (`DesainUI` §5.1, §6.2) — butuh: UI-01
-- [ ] **UI-03** Komponen dasar: `card`, `button`, `badge-status`, `form field` — butuh: UI-01
-- [ ] **UI-04** Komponen form: `slider-field`, `segmented`, `chip-group` — butuh: UI-03
-- [ ] **UI-05** `x-modal` (bottom sheet mobile + modal desktop, focus trap), toast, `empty-state`, skeleton — butuh: UI-03
-- [ ] **UI-06** `alert-cds` (tiga level) — butuh: UI-03
-- [ ] **UI-07** `data-table`, `chat-bubble` — butuh: UI-03
+- [x] **UI-01** `tailwind.config.js` dengan token warna/radius/bayangan (`DesainUI` §3) — butuh: SET-03
+- [x] **UI-02** Layout `guest`, `student` (bottom nav), `staff` (sidebar + topbar) (`DesainUI` §5.1, §6.2) — butuh: UI-01
+- [x] **UI-03** Komponen dasar: `card`, `button`, `badge-status`, `form-field` — butuh: UI-01
+- [x] **UI-04** Komponen form: `slider-field`, `segmented`, `chip-group` — butuh: UI-03
+- [x] **UI-05** `x-modal` (bottom sheet mobile + modal desktop, focus trap), toast, `empty-state`, skeleton — butuh: UI-03
+- [x] **UI-06** `alert-cds` (tiga level) — butuh: UI-03
+- [x] **UI-07** `data-table`, `chat-bubble` — butuh: UI-03
 
 ### Fase 3 — Autentikasi & RBAC
 - [ ] **AUTH-01** Login mahasiswa dengan NIM (M-01) — `FE` · butuh: UI-02, SET-05
@@ -233,6 +233,7 @@ Tambahkan entri baru **di atas** entri lama. Satu entri per sesi kerja yang meng
 
 | Tanggal | Oleh | Selesai | Sedang jalan / belum tuntas | Lanjut dari |
 | :--- | :--- | :--- | :--- | :--- |
+| 14 Nov 2026 | Antigravity AI | Fase 2: UI-01 s.d. UI-07 (Layouts guest/student/staff, card, button, badge-status, form-field, slider-field, segmented, chip-group, modal, toast, empty-state, skeleton, alert-cds, data-table, chat-bubble) + Pembersihan tabel bawaan Laravel di DB | SET-01 (mandiri oleh user) | Fase 3: `AUTH-01` |
 | 14 Nov 2026 | Antigravity AI | Fase 1: SET-02 (MySQL .env), SET-03 (Tailwind v4 token, Plus Jakarta Sans, Alpine, Lucide), SET-04 (11 migration tabel inti), SET-05 (Seeders 3 peran + dummy 7 hari + CDS v2.1) | SET-01 (dikerjakan mandiri oleh user) | `UI-01` / Fase 2 |
 | 13 Nov 2026 | Tim | Fase 0: DOC-01 s.d. DOC-05 | DOC-06 menunggu jadwal ahli | `SET-01` |
 
