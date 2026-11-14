@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use App\Http\Controllers\Student\HabitController as StudentHabitController;
 use Illuminate\Support\Facades\Route;
 
 // Redirect root to login
@@ -31,9 +33,9 @@ Route::get('/verification/notice', function () {
 Route::middleware(['auth'])->group(function () {
     // Student Routes (Protected by role:student and verified_student)
     Route::prefix('student')->name('student.')->middleware(['role:student', 'verified_student'])->group(function () {
-        Route::get('/home', function () {
-            return view('student.home');
-        })->name('home');
+        Route::get('/home', [StudentDashboardController::class, 'index'])->name('home');
+        Route::post('/habit-logs', [StudentHabitController::class, 'store'])->name('habit-logs.store');
+        Route::post('/alerts/dismiss', [StudentHabitController::class, 'dismissAlert'])->name('alerts.dismiss');
 
         Route::get('/history', function () {
             return view('student.history');

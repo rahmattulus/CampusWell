@@ -166,16 +166,16 @@ Pakai data tiruan (mock) sesuai kontrak ini sampai modul aslinya siap.
 - [x] **AUTH-05** Status akun "menunggu verifikasi" dan layar penunggu (`verification.notice`) — `FE` + `CDS`
 
 ### Fase 4 — Habit Tracker & CDS (inti)
-- [ ] **CDS-01** Tetapkan kontrak `CdsEvaluatorService` (bagian 4) dan kerangka kelas — `CDS`
-- [ ] **CDS-02** `cds_config.json`/tabel `cds_rules` berisi seluruh ambang aturan — `CDS` · butuh: CDS-01
-- [ ] **CDS-03** Implementasi aturan F-01, F-02, M-01, M-02 + uji otomatis memakai 8 skenario prototipe — `CDS` · butuh: CDS-02
-- [ ] **CDS-04** Pencatatan log audit evaluasi Perlu Perhatian (waktu, input, ID aturan) — `CDS` · butuh: CDS-03
-- [ ] **HAB-01** Beranda mahasiswa (M-03), awalnya data tiruan — `FE` · butuh: UI-04, UI-06
-- [ ] **HAB-02** Modal Form Habit Tracker (M-04) — `FE` · butuh: UI-04, UI-05
-- [ ] **HAB-03** Endpoint simpan log + hitung otomatis `sleep_streak` — `CDS` · butuh: SET-04
-- [ ] **HAB-04** Modal Hasil CDS (M-05, 3 varian) — `FE` · butuh: UI-05, UI-06, kontrak bagian 4
-- [ ] **HAB-05** Hubungkan form → evaluator → modal hasil; banner alert tetap di Beranda — `FE` + `CDS` · butuh: HAB-02, HAB-03, HAB-04, CDS-03
-- [ ] **HAB-06** Pengingat/keadaan "log hari ini sudah diisi" dan mode ubah log — `FE` · butuh: HAB-05
+- [x] **CDS-01** Tetapkan kontrak `CdsEvaluatorService` (bagian 4) dan kerangka kelas — `CDS`
+- [x] **CDS-02** `cds_config.json`/tabel `cds_rules` berisi seluruh ambang aturan — `CDS` · butuh: CDS-01
+- [x] **CDS-03** Implementasi aturan F-01, F-02, M-01, M-02 + uji otomatis memakai 8 skenario prototipe (14 tests passed) — `CDS` · butuh: CDS-02
+- [x] **CDS-04** Pencatatan log audit evaluasi Perlu Perhatian (waktu, input, ID aturan) — `CDS` · butuh: CDS-03
+- [x] **HAB-01** Beranda mahasiswa (M-03), awalnya data tiruan — `FE` · butuh: UI-04, UI-06
+- [x] **HAB-02** Modal Form Habit Tracker (M-04) — `FE` · butuh: UI-04, UI-05
+- [x] **HAB-03** Endpoint simpan log + hitung otomatis `sleep_streak` — `CDS` · butuh: SET-04
+- [x] **HAB-04** Modal Hasil CDS (M-05, 3 varian) — `FE` · butuh: UI-05, UI-06, kontrak bagian 4
+- [x] **HAB-05** Hubungkan form → evaluator → modal hasil; banner alert tetap di Beranda — `FE` + `CDS` · butuh: HAB-02, HAB-03, HAB-04, CDS-03
+- [x] **HAB-06** Pengingat/keadaan "log hari ini sudah diisi" dan mode ubah log — `FE` · butuh: HAB-05
 
 ### Fase 5 — Riwayat & Grafik (`FE`)
 - [ ] **HIS-01** Halaman Riwayat dengan tab Hari/Minggu/Bulan (M-06) — butuh: HAB-05
