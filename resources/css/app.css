@@ -1,0 +1,53 @@
+@import 'tailwindcss';
+@import '@fontsource/plus-jakarta-sans/400.css';
+@import '@fontsource/plus-jakarta-sans/500.css';
+@import '@fontsource/plus-jakarta-sans/600.css';
+@import '@fontsource/plus-jakarta-sans/700.css';
+
+@source '../../resources/**/*.blade.php';
+@source '../../resources/**/*.js';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --color-canvas: #F4F3F0;
+    --color-surface: #FFFFFF;
+    --color-surface-soft: #FAF9F7;
+    --color-line: #E7E5E0;
+
+    --color-ink: #17181A;
+    --color-ink-soft: #4B5058;
+    --color-ink-mute: #7A808A;
+
+    --color-sage: #E3EBD3;
+    --color-sage-strong: #7F9A66;
+
+    --color-lavender: #E8E1F3;
+    --color-lavender-strong: #8E7BBF;
+
+    --color-sky: #DCE7F7;
+    --color-sky-strong: #6F93CC;
+
+    --color-butter: #F8ECCB;
+    --color-butter-strong: #C99A2E;
+
+    --color-status-normal-bg: #DDEBD8;
+    --color-status-normal-fg: #2F6B3A;
+    --color-status-self-bg: #FBEBC8;
+    --color-status-self-fg: #8A5A00;
+    --color-status-risk-bg: #FBDDD8;
+    --color-status-risk-fg: #A5372B;
+
+    --radius-card: 24px;
+    --radius-card-sm: 16px;
+    --radius-control: 12px;
+
+    --shadow-card: 0 1px 2px rgba(23, 24, 26, 0.04);
+    --shadow-float: 0 8px 24px rgba(23, 24, 26, 0.10);
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+}

@@ -1,0 +1,108 @@
+{
+  "rules_version": "2.1.0",
+  "status": "draft_pending_expert_validation",
+  "fatigue": {
+    "sleep_hours_points": {
+      "severe": { "max": 4.5, "points": 3 },
+      "moderate": { "min": 4.5, "max": 6.0, "points": 2 },
+      "mild": { "min": 6.0, "max": 7.0, "points": 1 },
+      "normal": { "min": 7.0, "points": 0 }
+    },
+    "streak_points": {
+      "streak_3_plus": { "min_streak": 3, "points": 2 },
+      "streak_2": { "exact_streak": 2, "points": 1 }
+    },
+    "streak_non_consecutive": {
+      "window_days": 7,
+      "min_low_days": 3,
+      "low_sleep_threshold": 6.0,
+      "points": 1
+    },
+    "stress": {
+      "threshold": 4,
+      "points": 1
+    },
+    "subjective": {
+      "fresh_max": 2,
+      "complaint_chips": ["lelah", "konsentrasi"],
+      "points_one": 1,
+      "points_both": 2
+    },
+    "thresholds": {
+      "normal_max": 1,
+      "self_care_min": 2,
+      "self_care_max": 3,
+      "risk_min": 4
+    }
+  },
+  "gastric": {
+    "meal_freq_points": {
+      "very_low": { "max": 1, "points": 3 },
+      "low": { "exact": 2, "points": 2 },
+      "normal": { "min": 3, "points": 0 }
+    },
+    "trigger_points": {
+      "triggers": ["Pedas", "Asam", "High-Caffeine"],
+      "points_per_trigger": 1,
+      "max_points": 2
+    },
+    "late_eating_points": {
+      "threshold_hours": 2,
+      "points": 2
+    },
+    "stress": {
+      "threshold": 3,
+      "points": 1
+    },
+    "complaint_points": {
+      "specific": ["perih", "asam_naik"],
+      "specific_points": 2,
+      "nonspecific": ["mual", "kembung"],
+      "nonspecific_points": 1
+    },
+    "profile_booster": {
+      "p1_yes": 1,
+      "p2_regular": 1,
+      "p3_regular": 1,
+      "max": 2,
+      "requires_base_min": 1
+    },
+    "complaint_rules": {
+      "window_days": 5,
+      "k1_chips": ["perih", "asam_naik"],
+      "k2_min_days": 2,
+      "k2_score_min": 3,
+      "k3_min_days": 3,
+      "p_pattern_min_days": 3,
+      "p_pattern_score_min": 3,
+      "p_pattern_min_filled_days": 3
+    },
+    "thresholds": {
+      "normal_max": 2,
+      "self_care_min": 3,
+      "self_care_max": 4,
+      "risk_min": 5
+    }
+  },
+  "cbr": {
+    "enabled": true,
+    "k": 5,
+    "similarity_min": 0.80,
+    "min_supporting": 3,
+    "min_approved_cases": 30,
+    "weights": {
+      "avg_sleep": 0.15,
+      "max_sleep_streak": 0.15,
+      "avg_meal_freq": 0.10,
+      "trigger_day_ratio": 0.10,
+      "late_eating_ratio": 0.10,
+      "avg_stress": 0.10,
+      "gastric_complaint_ratio": 0.15,
+      "avg_freshness": 0.15
+    }
+  },
+  "cooldown": {
+    "dismissal_days": 3
+  }
+}
+
